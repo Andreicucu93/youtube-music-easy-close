@@ -7,7 +7,6 @@
 (function() {
     // 1. Neutralize any existing onbeforeunload handler
     window.onbeforeunload = null;
-    // 2. Hook addEventListener to block future 'beforeunload' registrations
     const origAddEventListener = window.addEventListener;
     window.addEventListener = function(type, listener, options) {
         if (type === 'beforeunload') {
@@ -16,6 +15,5 @@
         }
         return origAddEventListener.call(this, type, listener, options);
     };
-    // 3. (Optional) Remove any beforeunload events added via other means (if accessible)
-    // 4. Ensure no unload prompt: no handler should call preventDefault or set returnValue.
+
 })();
